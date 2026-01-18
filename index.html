@@ -14,23 +14,28 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
         }
 
         :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-card: #334155;
-            --bg-input: #475569;
-            --text-primary: #f8fafc;
-            --text-secondary: #cbd5e1;
-            --accent-primary: #3b82f6;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #262626;
+            --bg-input: #333333;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-primary: #6366f1;
             --accent-secondary: #8b5cf6;
+            --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --border: #475569;
-            --shadow: rgba(0, 0, 0, 0.3);
+            --border: #404040;
+            --shadow: rgba(0, 0, 0, 0.4);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --radius-lg: 16px;
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
@@ -38,39 +43,50 @@
             color: var(--text-primary);
             line-height: 1.6;
             min-height: 100vh;
-            transition: background-color 0.3s;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.1) 0%, transparent 20%);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
 
         /* Header */
         header {
-            background-color: var(--bg-secondary);
+            background-color: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 6px var(--shadow);
+            box-shadow: 0 4px 20px var(--shadow);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-primary);
+            gap: 12px;
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .logo i {
-            color: var(--accent-secondary);
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.8rem;
         }
 
         .auth-section {
@@ -82,18 +98,30 @@
         .user-info {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .user-info:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-primary);
         }
 
         .avatar {
-            width: 40px;
-            height: 40px;
-            background-color: var(--accent-primary);
+            width: 42px;
+            height: 42px;
+            background: var(--accent-gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
         }
 
         /* Auth Forms */
@@ -104,90 +132,138 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
             align-items: center;
             justify-content: center;
+            animation: fadeIn 0.3s ease-out;
         }
 
         .auth-form {
             background-color: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: 10px;
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
             width: 90%;
-            max-width: 400px;
-            box-shadow: 0 10px 25px var(--shadow);
+            max-width: 420px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+            transform: translateY(0);
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .auth-form h2 {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             text-align: center;
-            color: var(--accent-primary);
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2rem;
+            font-weight: 700;
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
         }
 
-        .form-group input {
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 0.75rem;
+            padding: 1rem;
             background-color: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 5px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
             color: var(--text-primary);
             font-size: 1rem;
+            transition: var(--transition);
         }
 
-        .form-group input:focus {
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
             border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            background-color: rgba(99, 102, 241, 0.05);
         }
 
         /* Tabs */
         .tabs {
             display: flex;
             background-color: var(--bg-secondary);
-            border-radius: 8px;
-            padding: 5px;
-            margin: 2rem 0;
+            border-radius: var(--radius-lg);
+            padding: 8px;
+            margin: 2.5rem 0;
             flex-wrap: wrap;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 24px var(--shadow);
         }
 
         .tab-btn {
             flex: 1;
-            padding: 12px 20px;
+            padding: 16px 24px;
             background: none;
             border: none;
             color: var(--text-secondary);
             cursor: pointer;
             font-size: 1rem;
             font-weight: 600;
-            border-radius: 6px;
-            transition: all 0.3s;
-            min-width: 120px;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            min-width: 140px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .tab-btn:hover {
-            background-color: var(--bg-card);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            transform: translateY(-2px);
         }
 
         .tab-btn.active {
-            background-color: var(--accent-primary);
+            background: var(--accent-gradient);
             color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--accent-gradient);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        .tab-btn.active::after {
+            width: 80%;
         }
 
         /* Tab Content */
         .tab-content {
             display: none;
-            animation: fadeIn 0.3s ease-in-out;
+            animation: fadeIn 0.4s ease-out;
         }
 
         .tab-content.active {
@@ -195,282 +271,429 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
         }
 
         /* Workout Form */
         .workout-form {
             background-color: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: 10px;
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .workout-form h2 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             margin-bottom: 2rem;
+            color: var(--text-primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .workout-form h2 i {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .form-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .sets-container {
             background-color: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-top: 1rem;
+            padding: 2rem;
+            border-radius: var(--radius);
+            margin-top: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .sets-container h3 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            font-size: 1.3rem;
         }
 
         .set-row {
             display: grid;
-            grid-template-columns: auto 1fr 1fr 1fr 1fr auto;
-            gap: 10px;
+            grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr auto;
+            gap: 15px;
             align-items: center;
-            margin-bottom: 10px;
-            padding: 10px;
+            margin-bottom: 15px;
+            padding: 20px;
             background-color: var(--bg-input);
-            border-radius: 5px;
+            border-radius: var(--radius-sm);
+            border-left: 4px solid transparent;
+            transition: var(--transition);
+        }
+
+        .set-row:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            transform: translateX(4px);
         }
 
         .set-row.warmup {
-            border-left: 4px solid var(--warning);
+            border-left-color: var(--warning);
+            background: linear-gradient(90deg, rgba(245, 158, 11, 0.1) 0%, rgba(51, 51, 51, 0.1) 100%);
         }
 
         .set-number {
-            font-weight: bold;
+            font-weight: 700;
             color: var(--accent-primary);
+            font-size: 1.1rem;
+            min-width: 60px;
+        }
+
+        /* Unit Toggle */
+        .unit-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .unit-btn {
+            padding: 8px 20px;
+            border: 2px solid var(--border);
+            background: none;
+            color: var(--text-secondary);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .unit-btn.active {
+            background: var(--accent-gradient);
+            color: white;
+            border-color: var(--accent-primary);
         }
 
         /* Buttons */
         .btn {
-            padding: 10px 20px;
+            padding: 12px 28px;
             border: none;
-            border-radius: 5px;
+            border-radius: var(--radius);
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s;
-            font-size: 0.9rem;
+            transition: var(--transition);
+            font-size: 1rem;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .btn-primary {
-            background-color: var(--accent-primary);
+            background: var(--accent-gradient);
             color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
         }
 
         .btn-primary:hover {
-            background-color: #2563eb;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
         }
 
         .btn-secondary {
             background-color: var(--bg-card);
             color: var(--text-primary);
+            border: 1px solid var(--border);
         }
 
         .btn-secondary:hover {
             background-color: var(--bg-input);
+            transform: translateY(-2px);
+            border-color: var(--accent-primary);
         }
 
         .btn-success {
             background-color: var(--success);
             color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
         }
 
         .btn-danger {
             background-color: var(--danger);
             color: white;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
         }
 
         .btn-small {
-            padding: 5px 10px;
-            font-size: 0.8rem;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            border-radius: var(--radius-sm);
         }
 
         /* Table */
         .table-container {
             overflow-x: auto;
             background-color: var(--bg-secondary);
-            border-radius: 10px;
-            padding: 1rem;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 24px var(--shadow);
         }
 
         table {
             width: 100%;
-            border-collapse: collapse;
-            min-width: 800px;
+            border-collapse: separate;
+            border-spacing: 0;
+            min-width: 900px;
         }
 
         th {
             background-color: var(--bg-card);
-            padding: 1rem;
+            padding: 1.25rem;
             text-align: left;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--accent-primary);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border);
         }
 
         td {
-            padding: 1rem;
+            padding: 1.25rem;
             border-bottom: 1px solid var(--border);
+            transition: var(--transition);
         }
 
-        tr:hover {
-            background-color: var(--bg-input);
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
         }
 
         /* Charts */
         .charts-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
             margin-top: 2rem;
         }
 
         .chart-card {
             background-color: var(--bg-secondary);
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px var(--shadow);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .chart-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow);
         }
 
         .chart-card h3 {
-            margin-bottom: 1rem;
-            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chart-card h3 i {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* Friends Section */
         .friends-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
 
         .friend-card {
             background-color: var(--bg-secondary);
-            padding: 1.5rem;
-            border-radius: 10px;
+            padding: 1.75rem;
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
-            gap: 1rem;
-            transition: transform 0.3s;
+            gap: 1.25rem;
+            transition: var(--transition);
             cursor: pointer;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .friend-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-gradient);
+            transition: var(--transition);
         }
 
         .friend-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             background-color: var(--bg-card);
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 25px var(--shadow);
+        }
+
+        .friend-card:hover::before {
+            width: 8px;
         }
 
         .friend-avatar {
-            width: 50px;
-            height: 50px;
-            background-color: var(--accent-secondary);
+            width: 60px;
+            height: 60px;
+            background: var(--accent-gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+            flex-shrink: 0;
         }
 
         /* Profile View */
         .profile-header {
-            background-color: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2.5rem;
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 2.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px var(--shadow);
         }
 
         .profile-avatar {
-            width: 80px;
-            height: 80px;
-            background-color: var(--accent-primary);
+            width: 100px;
+            height: 100px;
+            background: var(--accent-gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 2rem;
+            font-size: 2.5rem;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .profile-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* Messages */
         .message {
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1rem 0;
+            padding: 1.25rem;
+            border-radius: var(--radius);
+            margin: 1.5rem 0;
             display: none;
+            animation: slideIn 0.3s ease-out;
+            border: 1px solid transparent;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .message.success {
-            background-color: rgba(16, 185, 129, 0.2);
+            background-color: rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.3);
             border-left: 4px solid var(--success);
             display: block;
         }
 
         .message.error {
-            background-color: rgba(239, 68, 68, 0.2);
+            background-color: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.3);
             border-left: 4px solid var(--danger);
             display: block;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            header {
-                padding: 1rem;
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .auth-section {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .set-row {
-                grid-template-columns: 1fr;
-                gap: 5px;
-            }
-
-            .tab-btn {
-                min-width: 100px;
-                padding: 10px;
-                font-size: 0.9rem;
-            }
-
-            .charts-container {
-                grid-template-columns: 1fr;
-            }
+        .message.info {
+            background-color: rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.3);
+            border-left: 4px solid var(--accent-primary);
+            display: block;
         }
 
         /* Loading */
         .loading {
             text-align: center;
-            padding: 2rem;
+            padding: 3rem;
             color: var(--text-secondary);
         }
 
         .loading-spinner {
-            border: 3px solid var(--bg-input);
-            border-top: 3px solid var(--accent-primary);
+            border: 4px solid var(--bg-input);
+            border-top: 4px solid var(--accent-primary);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
+            margin: 0 auto 1.5rem;
         }
 
         @keyframes spin {
@@ -481,28 +704,263 @@
         /* Exercise Select */
         .exercise-select {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
             margin-top: 1rem;
         }
 
         .exercise-option {
-            padding: 10px;
+            padding: 14px;
             background-color: var(--bg-input);
-            border-radius: 5px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
             text-align: center;
+            font-weight: 500;
+            border: 2px solid transparent;
         }
 
         .exercise-option:hover {
-            background-color: var(--accent-primary);
+            background: var(--accent-gradient);
             color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
         }
 
         .exercise-option.selected {
-            background-color: var(--accent-primary);
+            background: var(--accent-gradient);
             color: white;
+            border-color: var(--accent-primary);
+            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-gradient);
+            border-radius: var(--radius);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #7c3aed 0%, #6366f1 100%);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 15px;
+            }
+
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .auth-section {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .set-row {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding: 1.5rem;
+            }
+
+            .tab-btn {
+                min-width: 120px;
+                padding: 14px;
+                font-size: 0.9rem;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+                padding: 2rem;
+            }
+
+            .friend-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                width: 100%;
+                min-width: auto;
+            }
+
+            .workout-form,
+            .auth-form {
+                padding: 1.5rem;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            transition: var(--transition);
+            z-index: 100;
+            border: none;
+        }
+
+        .fab:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.6);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.3;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--accent-gradient);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--bg-input);
+            transition: var(--transition);
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: var(--transition);
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background: var(--accent-gradient);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+
+        /* Card Hover Effects */
+        .hover-lift {
+            transition: var(--transition);
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-8px);
+        }
+
+        /* Glass Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--bg-input);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 4px;
+            transition: width 0.6s ease;
         }
     </style>
 </head>
@@ -514,18 +972,20 @@
             <div id="authMessage" class="message"></div>
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" id="authEmail" placeholder="Enter your email">
+                <input type="email" id="authEmail" placeholder="you@example.com">
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" id="authPassword" placeholder="Enter your password">
+                <input type="password" id="authPassword" placeholder="••••••••">
             </div>
             <div class="form-group">
-                <button id="authSubmit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+                <button id="authSubmit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
             </div>
-            <div style="text-align: center; margin-top: 1rem;">
+            <div style="text-align: center; margin-top: 1.5rem;">
                 <button id="switchAuth" class="btn btn-secondary" style="width: 100%;">
-                    Switch to Sign Up
+                    <i class="fas fa-user-plus"></i> Switch to Sign Up
                 </button>
             </div>
         </div>
@@ -557,11 +1017,21 @@
     <div class="container">
         <!-- Tabs -->
         <div class="tabs">
-            <button class="tab-btn active" data-tab="workout">🏋️ Log Workout</button>
-            <button class="tab-btn" data-tab="history">📊 Workout History</button>
-            <button class="tab-btn" data-tab="charts">📈 Progress Charts</button>
-            <button class="tab-btn" data-tab="friends">👥 Friends</button>
-            <button class="tab-btn" data-tab="profile">👤 My Profile</button>
+            <button class="tab-btn active" data-tab="workout">
+                <i class="fas fa-plus-circle"></i> Log Workout
+            </button>
+            <button class="tab-btn" data-tab="history">
+                <i class="fas fa-history"></i> History
+            </button>
+            <button class="tab-btn" data-tab="charts">
+                <i class="fas fa-chart-line"></i> Charts
+            </button>
+            <button class="tab-btn" data-tab="friends">
+                <i class="fas fa-users"></i> Friends
+            </button>
+            <button class="tab-btn" data-tab="profile">
+                <i class="fas fa-user"></i> Profile
+            </button>
         </div>
 
         <!-- Messages -->
@@ -569,15 +1039,16 @@
 
         <!-- Workout Tab -->
         <div id="workoutTab" class="tab-content active">
-            <div class="workout-form">
-                <h2><i class="fas fa-plus-circle"></i> Log New Workout</h2>
+            <div class="workout-form hover-lift">
+                <h2><i class="fas fa-dumbbell"></i> Log New Workout</h2>
+                
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Date</label>
+                        <label>Date <span class="badge">Required</span></label>
                         <input type="date" id="workoutDate">
                     </div>
                     <div class="form-group">
-                        <label>Split</label>
+                        <label>Split <span class="badge">Required</span></label>
                         <select id="workoutSplit" class="form-control">
                             <option value="">Select Split</option>
                             <option value="Push">Push</option>
@@ -590,17 +1061,28 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Exercise</label>
+                    <label>Exercise <span class="badge">Required</span></label>
                     <div class="exercise-select" id="exerciseSelect">
                         <!-- Exercises will be populated by JavaScript -->
                     </div>
-                    <div style="margin-top: 10px;">
-                        <input type="text" id="customExercise" placeholder="Or enter custom exercise name" style="width: 100%; padding: 10px; background-color: var(--bg-input); border: 1px solid var(--border); border-radius: 5px; color: var(--text-primary);">
+                    <div style="margin-top: 15px;">
+                        <input type="text" id="customExercise" placeholder="Or enter custom exercise name" class="form-control">
                     </div>
                 </div>
 
+                <div class="unit-toggle">
+                    <label style="margin-right: 15px;">Weight Unit:</label>
+                    <button class="unit-btn active" data-unit="lbs">lbs</button>
+                    <button class="unit-btn" data-unit="kg">kg</button>
+                </div>
+
                 <div class="sets-container">
-                    <h3>Sets <button id="addSet" class="btn btn-secondary btn-small"><i class="fas fa-plus"></i> Add Set</button></h3>
+                    <h3>
+                        <span><i class="fas fa-layer-group"></i> Sets</span>
+                        <button id="addSet" class="btn btn-secondary btn-small">
+                            <i class="fas fa-plus"></i> Add Set
+                        </button>
+                    </h3>
                     <div id="setsContainer">
                         <!-- Sets will be added here -->
                     </div>
@@ -608,7 +1090,7 @@
 
                 <div class="form-group">
                     <label>Notes</label>
-                    <textarea id="workoutNotes" rows="3" style="width: 100%; padding: 10px; background-color: var(--bg-input); border: 1px solid var(--border); border-radius: 5px; color: var(--text-primary);"></textarea>
+                    <textarea id="workoutNotes" rows="3" placeholder="Add any additional notes about your workout..."></textarea>
                 </div>
 
                 <button id="saveWorkout" class="btn btn-primary">
@@ -619,109 +1101,123 @@
 
         <!-- History Tab -->
         <div id="historyTab" class="tab-content">
-            <h2><i class="fas fa-history"></i> Workout History</h2>
-            <div class="table-container">
-                <div class="loading" id="historyLoading">
-                    <div class="loading-spinner"></div>
-                    Loading workout history...
+            <div class="workout-form">
+                <h2><i class="fas fa-history"></i> Workout History</h2>
+                <div class="table-container">
+                    <div class="loading" id="historyLoading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading workout history...</p>
+                    </div>
+                    <table id="workoutTable" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Split</th>
+                                <th>Exercise</th>
+                                <th>Sets</th>
+                                <th>Weight</th>
+                                <th>RIR</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="workoutTableBody">
+                            <!-- Workout entries will be added here -->
+                        </tbody>
+                    </table>
                 </div>
-                <table id="workoutTable" style="display: none;">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Split</th>
-                            <th>Exercise</th>
-                            <th>Sets x Reps</th>
-                            <th>Weight</th>
-                            <th>RPE</th>
-                            <th>Notes</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="workoutTableBody">
-                        <!-- Workout entries will be added here -->
-                    </tbody>
-                </table>
             </div>
         </div>
 
         <!-- Charts Tab -->
         <div id="chartsTab" class="tab-content">
-            <h2><i class="fas fa-chart-line"></i> Progress Charts</h2>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Select Exercise</label>
-                    <select id="chartExercise" class="form-control">
-                        <!-- Options will be populated by JavaScript -->
-                    </select>
+            <div class="workout-form">
+                <h2><i class="fas fa-chart-line"></i> Progress Charts</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Select Exercise</label>
+                        <select id="chartExercise" class="form-control">
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Chart Type</label>
+                        <select id="chartType" class="form-control">
+                            <option value="weight">Weight Progression</option>
+                            <option value="reps">Reps Progression</option>
+                            <option value="volume">Volume (Weight x Reps)</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Chart Type</label>
-                    <select id="chartType" class="form-control">
-                        <option value="weight">Weight Progression</option>
-                        <option value="reps">Reps Progression</option>
-                        <option value="volume">Volume (Weight x Reps)</option>
-                    </select>
-                </div>
-            </div>
-            <div class="charts-container">
-                <div class="chart-card">
-                    <h3>Exercise Progression</h3>
-                    <canvas id="exerciseChart"></canvas>
-                </div>
-                <div class="chart-card">
-                    <h3>Overview</h3>
-                    <canvas id="overviewChart"></canvas>
+                <div class="charts-container">
+                    <div class="chart-card hover-lift">
+                        <h3><i class="fas fa-chart-bar"></i> Exercise Progression</h3>
+                        <canvas id="exerciseChart"></canvas>
+                    </div>
+                    <div class="chart-card hover-lift">
+                        <h3><i class="fas fa-chart-pie"></i> Overview</h3>
+                        <canvas id="overviewChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Friends Tab -->
         <div id="friendsTab" class="tab-content">
-            <h2><i class="fas fa-users"></i> Friends</h2>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Add Friend by Email</label>
-                    <input type="email" id="friendEmail" placeholder="Enter friend's email">
+            <div class="workout-form">
+                <h2><i class="fas fa-users"></i> Friends</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Add Friend by Email</label>
+                        <input type="email" id="friendEmail" placeholder="friend@example.com">
+                    </div>
+                    <div class="form-group" style="display: flex; align-items: flex-end;">
+                        <button id="addFriendBtn" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i> Add Friend
+                        </button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <button id="addFriendBtn" class="btn btn-primary" style="margin-top: 25px;">
-                        <i class="fas fa-user-plus"></i> Add Friend
-                    </button>
+
+                <h3 style="margin-top: 2rem; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-user-friends"></i> Your Friends
+                </h3>
+                <div class="friends-grid" id="friendsList">
+                    <!-- Friends will be added here -->
                 </div>
-            </div>
 
-            <h3 style="margin-top: 2rem;">Your Friends</h3>
-            <div class="friends-grid" id="friendsList">
-                <!-- Friends will be added here -->
-            </div>
-
-            <h3 style="margin-top: 2rem;">Friend Requests</h3>
-            <div class="friends-grid" id="friendRequests">
-                <!-- Friend requests will be added here -->
+                <h3 style="margin-top: 2rem; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-bell"></i> Friend Requests
+                </h3>
+                <div class="friends-grid" id="friendRequests">
+                    <!-- Friend requests will be added here -->
+                </div>
             </div>
         </div>
 
         <!-- Profile Tab -->
         <div id="profileTab" class="tab-content">
-            <div class="profile-header">
+            <div class="profile-header hover-lift">
                 <div class="profile-avatar" id="profileAvatar">U</div>
                 <div>
                     <h2 id="profileName">User Name</h2>
                     <p id="profileEmail">user@example.com</p>
-                    <p>Member since: <span id="memberSince">Loading...</span></p>
+                    <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                        <i class="fas fa-calendar-alt"></i> Member since: <span id="memberSince">Loading...</span>
+                    </p>
                 </div>
             </div>
 
-            <h3>Profile Statistics</h3>
+            <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-chart-pie"></i> Profile Statistics
+            </h3>
             <div class="charts-container">
-                <div class="chart-card">
-                    <h3>Workouts by Split</h3>
+                <div class="chart-card hover-lift">
+                    <h3><i class="fas fa-chart-pie"></i> Workouts by Split</h3>
                     <canvas id="profileSplitChart"></canvas>
                 </div>
-                <div class="chart-card">
-                    <h3>Recent Activity</h3>
-                    <div id="recentActivity">
+                <div class="chart-card hover-lift">
+                    <h3><i class="fas fa-fire"></i> Recent Activity</h3>
+                    <div id="recentActivity" style="min-height: 300px; display: flex; align-items: center; justify-content: center;">
                         <!-- Recent workouts will be added here -->
                     </div>
                 </div>
@@ -732,78 +1228,95 @@
     <!-- Edit Modal -->
     <div id="editModal" class="auth-modal">
         <div class="auth-form" style="max-width: 500px;">
-            <h2>Edit Workout</h2>
+            <h2><i class="fas fa-edit"></i> Edit Workout</h2>
             <div id="editMessage" class="message"></div>
-            <div class="form-group">
-                <label>Date</label>
-                <input type="date" id="editDate">
-            </div>
-            <div class="form-group">
-                <label>Split</label>
-                <select id="editSplit" class="form-control">
-                    <option value="Push">Push</option>
-                    <option value="Pull">Pull</option>
-                    <option value="Legs">Legs</option>
-                    <option value="Upper">Upper</option>
-                    <option value="Lower">Lower</option>
-                </select>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="editDate">
+                </div>
+                <div class="form-group">
+                    <label>Split</label>
+                    <select id="editSplit" class="form-control">
+                        <option value="Push">Push</option>
+                        <option value="Pull">Pull</option>
+                        <option value="Legs">Legs</option>
+                        <option value="Upper">Upper</option>
+                        <option value="Lower">Lower</option>
+                    </select>
+                </div>
             </div>
             <div class="form-group">
                 <label>Exercise Name</label>
                 <input type="text" id="editExercise">
             </div>
-            <div class="form-group">
-                <label>Sets</label>
-                <input type="number" id="editSets" min="1">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Sets</label>
+                    <input type="number" id="editSets" min="1">
+                </div>
+                <div class="form-group">
+                    <label>Reps</label>
+                    <input type="number" id="editReps" min="1" max="9">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Weight</label>
+                    <input type="number" id="editWeight" step="0.5">
+                </div>
+                <div class="form-group">
+                    <label>RIR (0-2)</label>
+                    <input type="number" id="editRIR" min="0" max="2" step="0.5" placeholder="0-2">
+                </div>
             </div>
             <div class="form-group">
-                <label>Reps</label>
-                <input type="number" id="editReps" min="1" max="9">
-            </div>
-            <div class="form-group">
-                <label>Weight (lbs)</label>
-                <input type="number" id="editWeight" step="0.5">
-            </div>
-            <div class="form-group">
-                <label>RPE (6-8)</label>
-                <input type="number" id="editRPE" min="6" max="8" step="0.5">
-            </div>
-            <div class="form-group">
-                <label>Warm-up Set</label>
-                <input type="checkbox" id="editWarmup">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="editWarmup" style="width: auto;">
+                    <label for="editWarmup" style="margin: 0;">Warm-up Set</label>
+                </div>
             </div>
             <div class="form-group">
                 <label>Notes</label>
                 <textarea id="editNotes" rows="3"></textarea>
             </div>
-            <div class="form-group" style="display: flex; gap: 10px;">
-                <button id="updateWorkout" class="btn btn-success">Update</button>
-                <button id="deleteWorkout" class="btn btn-danger">Delete</button>
-                <button id="cancelEdit" class="btn btn-secondary">Cancel</button>
+            <div class="form-group" style="display: flex; gap: 10px; margin-top: 2rem;">
+                <button id="updateWorkout" class="btn btn-success" style="flex: 1;">
+                    <i class="fas fa-check"></i> Update
+                </button>
+                <button id="deleteWorkout" class="btn btn-danger" style="flex: 1;">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+                <button id="cancelEdit" class="btn btn-secondary" style="flex: 1;">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
             </div>
         </div>
     </div>
 
     <!-- Friend Profile Modal -->
     <div id="friendProfileModal" class="auth-modal">
-        <div class="auth-form" style="max-width: 800px; max-height: 80vh; overflow-y: auto;">
-            <h2 id="friendProfileName">Friend's Profile</h2>
-            <div class="profile-header">
+        <div class="auth-form" style="max-width: 900px; max-height: 85vh;">
+            <h2 id="friendProfileName"><i class="fas fa-user"></i> Friend's Profile</h2>
+            <div class="profile-header" style="padding: 2rem; margin-bottom: 2rem;">
                 <div class="profile-avatar" id="friendProfileAvatar">F</div>
                 <div>
-                    <p id="friendProfileEmail">Loading...</p>
+                    <p id="friendProfileEmail" style="font-size: 1.1rem; color: var(--text-secondary);">Loading...</p>
                 </div>
             </div>
-            <h3 style="margin-top: 2rem;">Workout History</h3>
+            <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-dumbbell"></i> Recent Workouts
+            </h3>
             <div class="table-container">
-                <table>
+                <table style="min-width: auto;">
                     <thead>
                         <tr>
                             <th>Date</th>
                             <th>Split</th>
                             <th>Exercise</th>
-                            <th>Sets x Reps</th>
+                            <th>Sets</th>
                             <th>Weight</th>
+                            <th>RIR</th>
                         </tr>
                     </thead>
                     <tbody id="friendWorkoutTable">
@@ -811,21 +1324,27 @@
                     </tbody>
                 </table>
             </div>
-            <button id="closeFriendProfile" class="btn btn-secondary" style="margin-top: 1rem; width: 100%;">Close</button>
+            <button id="closeFriendProfile" class="btn btn-secondary" style="margin-top: 2rem; width: 100%;">
+                <i class="fas fa-times"></i> Close
+            </button>
         </div>
     </div>
 
+    <!-- Floating Action Button -->
+    <button id="fabAddWorkout" class="fab" style="display: none;">
+        <i class="fas fa-plus"></i>
+    </button>
+
     <script>
-        // ⚠️ REPLACE WITH YOUR FIREBASE CONFIG ⚠️
+        // Firebase Config
         const firebaseConfig = {
-    apiKey: "AIzaSyB3LaHP3XnXrm9fW6VPHOZZpmp7G4S9xDw",
-    authDomain: "workouttracker-7244b.firebaseapp.com",
-    projectId: "workouttracker-7244b",
-    storageBucket: "workouttracker-7244b.firebasestorage.app",
-    messagingSenderId: "300267701626",
-    appId: "1:300267701626:web:7d1f66d43dbfd59eff02c3"
-    // Note: measurementId is not needed for the compat version
-};
+            apiKey: "AIzaSyB3LaHP3XnXrm9fW6VPHOZZpmp7G4S9xDw",
+            authDomain: "workouttracker-7244b.firebaseapp.com",
+            projectId: "workouttracker-7244b",
+            storageBucket: "workouttracker-7244b.firebasestorage.app",
+            messagingSenderId: "300267701626",
+            appId: "1:300267701626:web:7d1f66d43dbfd59eff02c3"
+        };
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
@@ -847,6 +1366,7 @@
         let currentOverviewChart = null;
         let currentProfileChart = null;
         let editingWorkoutId = null;
+        let currentUnit = 'lbs'; // Default unit
 
         // DOM Elements
         const elements = {
@@ -929,7 +1449,10 @@
             // Message
             message: document.getElementById('message'),
             editMessage: document.getElementById('editMessage'),
-            authMessage: document.getElementById('authMessage')
+            authMessage: document.getElementById('authMessage'),
+            
+            // FAB
+            fabAddWorkout: document.getElementById('fabAddWorkout')
         };
 
         // Initialize
@@ -951,10 +1474,12 @@
                     currentUser = user;
                     showUserSection(user);
                     loadUserData();
+                    elements.fabAddWorkout.style.display = 'flex';
                 } else {
                     currentUser = null;
                     hideUserSection();
                     showAuthModal();
+                    elements.fabAddWorkout.style.display = 'none';
                 }
             });
         });
@@ -963,6 +1488,17 @@
             // Tab navigation
             elements.tabBtns.forEach(btn => {
                 btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+            });
+            
+            // Unit toggle
+            document.querySelectorAll('.unit-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentUnit = e.target.dataset.unit;
+                    // Update all weight inputs to show the correct unit
+                    updateWeightUnitLabels();
+                });
             });
             
             // Auth
@@ -991,6 +1527,21 @@
             elements.deleteWorkout.addEventListener('click', deleteWorkout);
             elements.cancelEdit.addEventListener('click', () => {
                 elements.editModal.style.display = 'none';
+            });
+            
+            // FAB
+            elements.fabAddWorkout.addEventListener('click', () => {
+                switchTab('workout');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        function updateWeightUnitLabels() {
+            document.querySelectorAll('.set-row .set-weight').forEach(input => {
+                const label = input.parentElement.querySelector('label');
+                if (label) {
+                    label.textContent = `Weight (${currentUnit})`;
+                }
             });
         }
 
@@ -1037,11 +1588,11 @@
             if (isSignUp) {
                 elements.authTitle.textContent = 'Sign Up';
                 elements.authSubmit.textContent = 'Sign Up';
-                elements.switchAuth.textContent = 'Switch to Sign In';
+                elements.switchAuth.innerHTML = '<i class="fas fa-sign-in-alt"></i> Switch to Sign In';
             } else {
                 elements.authTitle.textContent = 'Sign In';
                 elements.authSubmit.textContent = 'Sign In';
-                elements.switchAuth.textContent = 'Switch to Sign Up';
+                elements.switchAuth.innerHTML = '<i class="fas fa-user-plus"></i> Switch to Sign Up';
             }
         }
 
@@ -1063,7 +1614,8 @@
                         displayName: email.split('@')[0],
                         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                         friends: [],
-                        friendRequests: []
+                        friendRequests: [],
+                        unitPreference: 'lbs'
                     });
                     showMessage('Account created successfully!');
                 } else {
@@ -1158,21 +1710,25 @@
                 <div class="set-number">Set ${setNumber}</div>
                 <div>
                     <label>Reps (1-9)</label>
-                    <input type="number" class="set-reps" min="1" max="9" value="8" style="width: 100%; padding: 5px; background-color: var(--bg-input); border: 1px solid var(--border); border-radius: 3px; color: var(--text-primary);">
+                    <input type="number" class="set-reps" min="1" max="9" placeholder="e.g., 8" style="width: 100%; padding: 10px; background-color: var(--bg-input); border: 2px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary);">
                 </div>
                 <div>
-                    <label>Weight (lbs)</label>
-                    <input type="number" class="set-weight" step="0.5" value="135" style="width: 100%; padding: 5px; background-color: var(--bg-input); border: 1px solid var(--border); border-radius: 3px; color: var(--text-primary);">
+                    <label>Weight (${currentUnit})</label>
+                    <input type="number" class="set-weight" step="0.5" placeholder="e.g., 135" style="width: 100%; padding: 10px; background-color: var(--bg-input); border: 2px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary);">
                 </div>
                 <div>
-                    <label>RPE (6-8)</label>
-                    <input type="number" class="set-rpe" min="6" max="8" step="0.5" value="7" style="width: 100%; padding: 5px; background-color: var(--bg-input); border: 1px solid var(--border); border-radius: 3px; color: var(--text-primary);">
+                    <label>RIR (0-2)</label>
+                    <input type="number" class="set-rir" min="0" max="2" step="0.5" placeholder="0-2" style="width: 100%; padding: 10px; background-color: var(--bg-input); border: 2px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary);">
                 </div>
                 <div>
-                    <label>Warm-up?</label>
-                    <input type="checkbox" class="set-warmup" style="margin-top: 8px;">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" class="set-warmup" style="width: auto;">
+                        Warm-up
+                    </label>
                 </div>
-                <button class="btn btn-danger btn-small remove-set"><i class="fas fa-times"></i></button>
+                <button class="btn btn-danger btn-small remove-set" style="height: 40px; align-self: center;">
+                    <i class="fas fa-times"></i>
+                </button>
             `;
             
             setDiv.querySelector('.remove-set').addEventListener('click', () => {
@@ -1204,17 +1760,27 @@
             }
             
             const sets = Array.from(elements.setsContainer.children).map((setDiv, index) => {
+                const reps = setDiv.querySelector('.set-reps').value;
+                const weight = setDiv.querySelector('.set-weight').value;
+                const rir = setDiv.querySelector('.set-rir').value;
+                
+                // Validate inputs
+                if (!reps || !weight) {
+                    return null;
+                }
+                
                 return {
                     setNumber: index + 1,
-                    reps: parseInt(setDiv.querySelector('.set-reps').value),
-                    weight: parseFloat(setDiv.querySelector('.set-weight').value),
-                    rpe: parseFloat(setDiv.querySelector('.set-rpe').value),
-                    warmup: setDiv.querySelector('.set-warmup').checked
+                    reps: parseInt(reps),
+                    weight: parseFloat(weight),
+                    rir: rir ? parseFloat(rir) : 0,
+                    warmup: setDiv.querySelector('.set-warmup').checked,
+                    unit: currentUnit
                 };
-            });
+            }).filter(set => set !== null);
             
             if (sets.length === 0) {
-                showMessage('Please add at least one set', 'error');
+                showMessage('Please fill in at least one valid set', 'error');
                 return;
             }
             
@@ -1231,7 +1797,8 @@
                     exercise: exercise,
                     notes: notes,
                     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    totalSets: sets.length
+                    totalSets: sets.length,
+                    unit: currentUnit
                 };
                 
                 batch.set(workoutRef, workoutData);
@@ -1245,7 +1812,7 @@
                 
                 await batch.commit();
                 
-                showMessage('Workout saved successfully!');
+                showMessage('Workout saved successfully!', 'success');
                 clearWorkoutForm();
                 
                 // If on history tab, refresh
@@ -1253,7 +1820,12 @@
                     loadWorkoutHistory();
                 }
             } catch (error) {
-                showMessage('Error saving workout: ' + error.message, 'error');
+                console.error('Save workout error:', error);
+                if (error.code === 'failed-precondition') {
+                    showMessage('Please create the required index in Firebase Console', 'error');
+                } else {
+                    showMessage('Error saving workout: ' + error.message, 'error');
+                }
             }
         }
 
@@ -1274,9 +1846,11 @@
             elements.workoutTable.style.display = 'none';
             
             try {
+                // Use compound query with composite index
                 const workoutsSnapshot = await db.collection('workouts')
                     .where('userId', '==', currentUser.uid)
                     .orderBy('date', 'desc')
+                    .orderBy('createdAt', 'desc') // Secondary sort for consistent ordering
                     .get();
                 
                 elements.workoutTableBody.innerHTML = '';
@@ -1284,8 +1858,12 @@
                 if (workoutsSnapshot.empty) {
                     elements.workoutTableBody.innerHTML = `
                         <tr>
-                            <td colspan="8" style="text-align: center; padding: 2rem;">
-                                No workouts found. Start by logging your first workout!
+                            <td colspan="8" style="text-align: center; padding: 3rem;">
+                                <div class="empty-state">
+                                    <i class="fas fa-dumbbell"></i>
+                                    <h3>No workouts yet</h3>
+                                    <p>Start by logging your first workout!</p>
+                                </div>
                             </td>
                         </tr>
                     `;
@@ -1297,26 +1875,31 @@
                         
                         // Calculate totals
                         const totalSets = sets.length;
-                        const avgReps = (sets.reduce((sum, set) => sum + set.reps, 0) / totalSets).toFixed(1);
-                        const maxWeight = Math.max(...sets.map(set => set.weight));
-                        const avgRPE = (sets.reduce((sum, set) => sum + set.rpe, 0) / totalSets).toFixed(1);
+                        const avgReps = sets.length > 0 ? 
+                            (sets.reduce((sum, set) => sum + set.reps, 0) / totalSets).toFixed(1) : 0;
+                        const maxWeight = sets.length > 0 ? 
+                            Math.max(...sets.map(set => set.weight)) : 0;
+                        const avgRIR = sets.length > 0 ? 
+                            (sets.reduce((sum, set) => sum + (set.rir || 0), 0) / totalSets).toFixed(1) : 0;
                         
                         const row = document.createElement('tr');
                         row.innerHTML = `
                             <td>${workout.date}</td>
-                            <td>${workout.split}</td>
-                            <td>${workout.exercise}</td>
+                            <td><span class="badge">${workout.split}</span></td>
+                            <td><strong>${workout.exercise}</strong></td>
                             <td>${totalSets} × ${avgReps}</td>
-                            <td>${maxWeight} lbs</td>
-                            <td>${avgRPE}</td>
-                            <td>${workout.notes || '-'}</td>
+                            <td>${maxWeight} ${workout.unit || 'lbs'}</td>
+                            <td>${avgRIR}</td>
+                            <td>${workout.notes ? workout.notes.substring(0, 30) + '...' : '-'}</td>
                             <td>
-                                <button class="btn btn-secondary btn-small edit-workout" data-id="${doc.id}">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger btn-small delete-workout" data-id="${doc.id}">
-                                    <i class="fas fa-trash"></i>
-                                </button>
+                                <div style="display: flex; gap: 8px;">
+                                    <button class="btn btn-secondary btn-small edit-workout" data-id="${doc.id}" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-small delete-workout" data-id="${doc.id}" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
                             </td>
                         `;
                         
@@ -1330,8 +1913,22 @@
                 elements.historyLoading.style.display = 'none';
                 elements.workoutTable.style.display = 'table';
             } catch (error) {
+                console.error('Load history error:', error);
                 showMessage('Error loading workouts: ' + error.message, 'error');
                 elements.historyLoading.style.display = 'none';
+                
+                // Show empty state with error message
+                elements.workoutTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 3rem;">
+                            <div class="empty-state">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <h3>Error loading workouts</h3>
+                                <p>Please try again later</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
             }
         }
 
@@ -1348,7 +1945,7 @@
                 elements.editSets.value = sets.length;
                 elements.editReps.value = firstSet.reps;
                 elements.editWeight.value = firstSet.weight;
-                elements.editRPE.value = firstSet.rpe;
+                elements.editRPE.value = firstSet.rir || 0;
                 elements.editWarmup.checked = firstSet.warmup || false;
             }
             
@@ -1365,7 +1962,7 @@
                     notes: elements.editNotes.value
                 });
                 
-                showMessage('Workout updated successfully!');
+                showMessage('Workout updated successfully!', 'success');
                 elements.editModal.style.display = 'none';
                 loadWorkoutHistory();
             } catch (error) {
@@ -1388,7 +1985,7 @@
                 // Delete the workout document
                 await db.collection('workouts').doc(editingWorkoutId).delete();
                 
-                showMessage('Workout deleted successfully!');
+                showMessage('Workout deleted successfully!', 'success');
                 elements.editModal.style.display = 'none';
                 loadWorkoutHistory();
             } catch (error) {
@@ -1411,7 +2008,7 @@
                 batch.delete(workoutRef);
                 
                 await batch.commit();
-                showMessage('Workout deleted successfully!');
+                showMessage('Workout deleted successfully!', 'success');
                 loadWorkoutHistory();
             } catch (error) {
                 showMessage('Error deleting workout: ' + error.message, 'error');
@@ -1422,26 +2019,30 @@
         async function loadChartData() {
             if (!currentUser) return;
             
-            // Load unique exercises for dropdown
-            const workoutsSnapshot = await db.collection('workouts')
-                .where('userId', '==', currentUser.uid)
-                .get();
-            
-            const exercises = new Set();
-            workoutsSnapshot.forEach(doc => {
-                exercises.add(doc.data().exercise);
-            });
-            
-            elements.chartExercise.innerHTML = '<option value="">Select Exercise</option>';
-            exercises.forEach(exercise => {
-                const option = document.createElement('option');
-                option.value = exercise;
-                option.textContent = exercise;
-                elements.chartExercise.appendChild(option);
-            });
-            
-            // Load overview chart
-            loadOverviewChart();
+            try {
+                // Load unique exercises for dropdown
+                const workoutsSnapshot = await db.collection('workouts')
+                    .where('userId', '==', currentUser.uid)
+                    .get();
+                
+                const exercises = new Set();
+                workoutsSnapshot.forEach(doc => {
+                    exercises.add(doc.data().exercise);
+                });
+                
+                elements.chartExercise.innerHTML = '<option value="">Select Exercise</option>';
+                exercises.forEach(exercise => {
+                    const option = document.createElement('option');
+                    option.value = exercise;
+                    option.textContent = exercise;
+                    elements.chartExercise.appendChild(option);
+                });
+                
+                // Load overview chart
+                loadOverviewChart();
+            } catch (error) {
+                console.error('Load chart data error:', error);
+            }
         }
 
         async function loadExerciseChart() {
@@ -1463,7 +2064,10 @@
                     }
                     const ctx = elements.exerciseChart.getContext('2d');
                     ctx.clearRect(0, 0, elements.exerciseChart.width, elements.exerciseChart.height);
-                    ctx.fillText('No data available for this exercise', 10, 50);
+                    ctx.font = '16px Inter';
+                    ctx.fillStyle = '#a0a0a0';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('No data available for this exercise', elements.exerciseChart.width/2, elements.exerciseChart.height/2);
                     return;
                 }
                 
@@ -1479,20 +2083,22 @@
                     
                     if (type === 'weight') {
                         // Max weight for that workout
-                        const maxWeight = Math.max(...sets.map(set => set.weight));
+                        const maxWeight = sets.length > 0 ? Math.max(...sets.map(set => set.weight)) : 0;
                         data.push(maxWeight);
                     } else if (type === 'reps') {
                         // Average reps for that workout
-                        const avgReps = sets.reduce((sum, set) => sum + set.reps, 0) / sets.length;
+                        const avgReps = sets.length > 0 ? 
+                            sets.reduce((sum, set) => sum + set.reps, 0) / sets.length : 0;
                         data.push(avgReps);
                     } else if (type === 'volume') {
                         // Total volume (weight × reps) for that workout
-                        const totalVolume = sets.reduce((sum, set) => sum + (set.weight * set.reps), 0);
+                        const totalVolume = sets.length > 0 ? 
+                            sets.reduce((sum, set) => sum + (set.weight * set.reps), 0) : 0;
                         data.push(totalVolume);
                     }
                 }
                 
-                const chartLabel = type === 'weight' ? 'Weight (lbs)' : 
+                const chartLabel = type === 'weight' ? 'Weight' : 
                                  type === 'reps' ? 'Average Reps' : 'Total Volume';
                 
                 if (currentExerciseChart) {
@@ -1506,23 +2112,60 @@
                         datasets: [{
                             label: `${exercise} ${chartLabel}`,
                             data: data,
-                            borderColor: '#3b82f6',
-                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderColor: '#6366f1',
+                            backgroundColor: 'rgba(99, 102, 241, 0.1)',
                             fill: true,
-                            tension: 0.4
+                            tension: 0.4,
+                            pointBackgroundColor: '#6366f1',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 6,
+                            pointHoverRadius: 8
                         }]
                     },
                     options: {
                         responsive: true,
+                        maintainAspectRatio: true,
                         plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                                labels: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 14,
+                                        family: 'Inter'
+                                    }
+                                }
+                            },
                             title: {
                                 display: true,
-                                text: `${exercise} Progression`
+                                text: `${exercise} Progression`,
+                                color: '#ffffff',
+                                font: {
+                                    size: 18,
+                                    weight: 'bold',
+                                    family: 'Inter'
+                                }
                             }
                         },
                         scales: {
+                            x: {
+                                ticks: {
+                                    color: '#a0a0a0'
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            },
                             y: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                ticks: {
+                                    color: '#a0a0a0'
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
                             }
                         }
                     }
@@ -1538,40 +2181,39 @@
             try {
                 const workoutsSnapshot = await db.collection('workouts')
                     .where('userId', '==', currentUser.uid)
-                    .orderBy('date')
                     .get();
                 
                 // Group by month
                 const monthlyData = {};
-                const splits = new Set();
+                const splits = new Set(['Push', 'Pull', 'Legs', 'Upper', 'Lower']);
                 
                 for (const doc of workoutsSnapshot.docs) {
                     const workout = doc.data();
-                    const month = workout.date.substring(0, 7); // YYYY-MM
-                    splits.add(workout.split);
+                    const date = new Date(workout.date);
+                    const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
                     
-                    if (!monthlyData[month]) {
-                        monthlyData[month] = {};
+                    if (!monthlyData[monthKey]) {
+                        monthlyData[monthKey] = {};
+                        splits.forEach(split => monthlyData[monthKey][split] = 0);
                     }
                     
-                    if (!monthlyData[month][workout.split]) {
-                        monthlyData[month][workout.split] = 0;
+                    if (monthlyData[monthKey][workout.split] !== undefined) {
+                        monthlyData[monthKey][workout.split]++;
                     }
-                    
-                    monthlyData[month][workout.split]++;
                 }
                 
                 const months = Object.keys(monthlyData).sort();
                 const splitArray = Array.from(splits);
                 
                 const datasets = splitArray.map((split, index) => {
-                    const colors = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444'];
+                    const colors = ['#6366f1', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444'];
                     return {
                         label: split,
                         data: months.map(month => monthlyData[month][split] || 0),
-                        backgroundColor: colors[index % colors.length],
+                        backgroundColor: colors[index % colors.length] + '80', // 50% opacity
                         borderColor: colors[index % colors.length],
-                        fill: false
+                        borderWidth: 2,
+                        fill: true
                     };
                 });
                 
@@ -1582,23 +2224,62 @@
                 currentOverviewChart = new Chart(elements.overviewChart, {
                     type: 'bar',
                     data: {
-                        labels: months,
+                        labels: months.map(m => {
+                            const [year, month] = m.split('-');
+                            return `${month}/${year.substring(2)}`;
+                        }),
                         datasets: datasets
                     },
                     options: {
                         responsive: true,
+                        maintainAspectRatio: true,
                         plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                                labels: {
+                                    color: '#ffffff',
+                                    font: {
+                                        size: 14,
+                                        family: 'Inter'
+                                    }
+                                }
+                            },
                             title: {
                                 display: true,
-                                text: 'Workouts by Split (Monthly)'
+                                text: 'Workouts by Split',
+                                color: '#ffffff',
+                                font: {
+                                    size: 18,
+                                    weight: 'bold',
+                                    family: 'Inter'
+                                }
                             }
                         },
                         scales: {
+                            x: {
+                                stacked: false,
+                                ticks: {
+                                    color: '#a0a0a0'
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            },
                             y: {
                                 beginAtZero: true,
+                                stacked: false,
+                                ticks: {
+                                    color: '#a0a0a0',
+                                    precision: 0
+                                },
                                 title: {
                                     display: true,
-                                    text: 'Number of Workouts'
+                                    text: 'Number of Workouts',
+                                    color: '#a0a0a0'
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
                                 }
                             }
                         }
@@ -1654,7 +2335,7 @@
                     friendRequests: firebase.firestore.FieldValue.arrayUnion(currentUser.uid)
                 });
                 
-                showMessage('Friend request sent!');
+                showMessage('Friend request sent!', 'success');
                 elements.friendEmail.value = '';
                 loadFriends();
             } catch (error) {
@@ -1681,7 +2362,15 @@
                         }
                     }
                 } else {
-                    elements.friendsList.innerHTML = '<p>No friends yet. Add some friends!</p>';
+                    elements.friendsList.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                            <div class="empty-state">
+                                <i class="fas fa-user-friends"></i>
+                                <h3>No friends yet</h3>
+                                <p>Add friends to see their workouts!</p>
+                            </div>
+                        </div>
+                    `;
                 }
                 
                 // Load friend requests
@@ -1703,12 +2392,13 @@
 
         function createFriendCard(friendId, friendData, isFriend = true) {
             const card = document.createElement('div');
-            card.className = 'friend-card';
+            card.className = 'friend-card hover-lift';
             card.innerHTML = `
                 <div class="friend-avatar">${friendData.displayName?.[0]?.toUpperCase() || 'F'}</div>
-                <div>
-                    <h4>${friendData.displayName || 'Friend'}</h4>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">${friendData.email}</p>
+                <div style="flex: 1;">
+                    <h4 style="margin-bottom: 5px;">${friendData.displayName || 'Friend'}</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 10px;">${friendData.email}</p>
+                    <span class="badge">Friend</span>
                 </div>
             `;
             
@@ -1718,15 +2408,19 @@
 
         function createFriendRequestCard(requesterId, requesterData) {
             const card = document.createElement('div');
-            card.className = 'friend-card';
+            card.className = 'friend-card hover-lift';
             card.innerHTML = `
                 <div class="friend-avatar">${requesterData.displayName?.[0]?.toUpperCase() || 'R'}</div>
-                <div>
-                    <h4>${requesterData.displayName || 'User'}</h4>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">${requesterData.email}</p>
-                    <div style="margin-top: 10px; display: flex; gap: 5px;">
-                        <button class="btn btn-success btn-small accept-request">Accept</button>
-                        <button class="btn btn-danger btn-small reject-request">Reject</button>
+                <div style="flex: 1;">
+                    <h4 style="margin-bottom: 5px;">${requesterData.displayName || 'User'}</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px;">${requesterData.email}</p>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-success btn-small accept-request" style="flex: 1;">
+                            <i class="fas fa-check"></i> Accept
+                        </button>
+                        <button class="btn btn-danger btn-small reject-request" style="flex: 1;">
+                            <i class="fas fa-times"></i> Reject
+                        </button>
                     </div>
                 </div>
             `;
@@ -1759,7 +2453,7 @@
                     friends: firebase.firestore.FieldValue.arrayUnion(currentUser.uid)
                 });
                 
-                showMessage('Friend request accepted!');
+                showMessage('Friend request accepted!', 'success');
                 loadFriends();
             } catch (error) {
                 showMessage('Error accepting friend request: ' + error.message, 'error');
@@ -1773,7 +2467,7 @@
                     friendRequests: firebase.firestore.FieldValue.arrayRemove(friendId)
                 });
                 
-                showMessage('Friend request rejected');
+                showMessage('Friend request rejected', 'success');
                 loadFriends();
             } catch (error) {
                 showMessage('Error rejecting friend request: ' + error.message, 'error');
@@ -1781,7 +2475,7 @@
         }
 
         async function viewFriendProfile(friendId, friendData) {
-            elements.friendProfileName.textContent = `${friendData.displayName}'s Profile`;
+            elements.friendProfileName.innerHTML = `<i class="fas fa-user"></i> ${friendData.displayName}'s Profile`;
             elements.friendProfileAvatar.textContent = friendData.displayName?.[0]?.toUpperCase() || 'F';
             elements.friendProfileEmail.textContent = friendData.email;
             
@@ -1798,8 +2492,12 @@
                 if (workoutsSnapshot.empty) {
                     elements.friendWorkoutTable.innerHTML = `
                         <tr>
-                            <td colspan="5" style="text-align: center; padding: 2rem;">
-                                No workouts found for this user.
+                            <td colspan="6" style="text-align: center; padding: 3rem;">
+                                <div class="empty-state">
+                                    <i class="fas fa-dumbbell"></i>
+                                    <h3>No workouts yet</h3>
+                                    <p>This user hasn't logged any workouts</p>
+                                </div>
                             </td>
                         </tr>
                     `;
@@ -1810,22 +2508,34 @@
                         const sets = setsSnapshot.docs.map(setDoc => setDoc.data());
                         
                         const totalSets = sets.length;
-                        const avgReps = (sets.reduce((sum, set) => sum + set.reps, 0) / totalSets).toFixed(1);
-                        const maxWeight = Math.max(...sets.map(set => set.weight));
+                        const avgReps = sets.length > 0 ? 
+                            (sets.reduce((sum, set) => sum + set.reps, 0) / totalSets).toFixed(1) : 0;
+                        const maxWeight = sets.length > 0 ? 
+                            Math.max(...sets.map(set => set.weight)) : 0;
+                        const avgRIR = sets.length > 0 ? 
+                            (sets.reduce((sum, set) => sum + (set.rir || 0), 0) / totalSets).toFixed(1) : 0;
                         
                         const row = document.createElement('tr');
                         row.innerHTML = `
                             <td>${workout.date}</td>
-                            <td>${workout.split}</td>
-                            <td>${workout.exercise}</td>
+                            <td><span class="badge">${workout.split}</span></td>
+                            <td><strong>${workout.exercise}</strong></td>
                             <td>${totalSets} × ${avgReps}</td>
-                            <td>${maxWeight} lbs</td>
+                            <td>${maxWeight} ${workout.unit || 'lbs'}</td>
+                            <td>${avgRIR}</td>
                         `;
                         elements.friendWorkoutTable.appendChild(row);
                     }
                 }
             } catch (error) {
                 console.error('Error loading friend workouts:', error);
+                elements.friendWorkoutTable.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 3rem; color: var(--danger);">
+                            <i class="fas fa-exclamation-triangle"></i> Error loading workouts
+                        </td>
+                    </tr>
+                `;
             }
             
             elements.friendProfileModal.style.display = 'flex';
@@ -1863,21 +2573,54 @@
                 elements.recentActivity.innerHTML = '';
                 
                 if (workoutsSnapshot.empty) {
-                    elements.recentActivity.innerHTML = '<p>No recent workouts</p>';
+                    elements.recentActivity.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-dumbbell"></i>
+                            <h3>No recent activity</h3>
+                            <p>Log your first workout!</p>
+                        </div>
+                    `;
                 } else {
-                    const list = document.createElement('ul');
-                    list.style.listStyle = 'none';
-                    list.style.padding = '0';
+                    const list = document.createElement('div');
+                    list.style.display = 'flex';
+                    list.style.flexDirection = 'column';
+                    list.style.gap = '15px';
                     
                     workoutsSnapshot.forEach(doc => {
                         const workout = doc.data();
-                        const item = document.createElement('li');
-                        item.style.padding = '10px';
-                        item.style.borderBottom = '1px solid var(--border)';
+                        const item = document.createElement('div');
+                        item.style.padding = '20px';
+                        item.style.background = 'var(--bg-card)';
+                        item.style.borderRadius = 'var(--radius)';
+                        item.style.border = '1px solid var(--border)';
+                        item.style.transition = 'var(--transition)';
+                        
                         item.innerHTML = `
-                            <strong>${workout.date}</strong> - ${workout.split}<br>
-                            <small>${workout.exercise}</small>
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                                <div>
+                                    <strong style="font-size: 1.1rem;">${workout.exercise}</strong>
+                                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 5px;">
+                                        <i class="fas fa-calendar"></i> ${workout.date} • 
+                                        <span class="badge" style="margin-left: 8px;">${workout.split}</span>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Completed</div>
+                                </div>
+                            </div>
+                            ${workout.notes ? `<p style="color: var(--text-secondary); margin-top: 10px; font-size: 0.9rem;"><i class="fas fa-sticky-note"></i> ${workout.notes}</p>` : ''}
                         `;
+                        
+                        item.addEventListener('mouseenter', () => {
+                            item.style.transform = 'translateY(-4px)';
+                            item.style.boxShadow = '0 10px 25px var(--shadow)';
+                        });
+                        
+                        item.addEventListener('mouseleave', () => {
+                            item.style.transform = 'translateY(0)';
+                            item.style.boxShadow = 'none';
+                        });
+                        
                         list.appendChild(item);
                     });
                     
@@ -1923,22 +2666,37 @@
                         datasets: [{
                             data: Object.values(splitCounts),
                             backgroundColor: [
-                                '#3b82f6',
+                                '#6366f1',
                                 '#8b5cf6',
                                 '#10b981',
                                 '#f59e0b',
                                 '#ef4444'
-                            ]
+                            ],
+                            borderColor: 'var(--bg-primary)',
+                            borderWidth: 3,
+                            hoverOffset: 20
                         }]
                     },
                     options: {
                         responsive: true,
+                        maintainAspectRatio: true,
                         plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    color: '#ffffff',
+                                    padding: 20,
+                                    font: {
+                                        size: 14,
+                                        family: 'Inter'
+                                    }
+                                }
+                            },
                             title: {
-                                display: true,
-                                text: 'Workout Distribution'
+                                display: false
                             }
-                        }
+                        },
+                        cutout: '65%'
                     }
                 });
             } catch (error) {
